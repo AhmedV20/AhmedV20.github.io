@@ -1,0 +1,12 @@
+# Redirect all pages to Coming Soon page during construction
+# This ensures no other pages can be accessed directly
+
+RewriteEngine On
+
+# Allow access to assets (CSS, JS, images)
+RewriteRule ^(styles\.css|script\.js|images/.*|assets/.*)$ - [L]
+
+# Redirect all other pages to the homepage
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_URI} !^/index\.html$
+RewriteRule ^.*$ / [R=302,L]
