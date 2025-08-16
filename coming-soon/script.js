@@ -1,14 +1,3 @@
-// Redirect protection - ensure only Coming Soon page is accessible
-(function() {
-    const currentPath = window.location.pathname;
-    const allowedPaths = ['/', '/index.html', '/coming-soon.html'];
-    
-    if (!allowedPaths.includes(currentPath)) {
-        window.location.replace('/');
-        return;
-    }
-})();
-
 // Dark Mode Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('themeToggle');
