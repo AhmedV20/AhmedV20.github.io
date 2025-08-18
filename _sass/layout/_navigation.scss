@@ -176,6 +176,9 @@
   position: relative;
   min-width: 250px;
   background: var(--global-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   a {
     display: block;
@@ -190,24 +193,22 @@
   }
 
   button {
-    position: absolute;
-    height: 2.5rem;
-    right: 0;
-    padding: 0 0.5rem;
-    border: 0;
-    outline: none;
-    background-color: var(--global-base-color);
-    color: #fff;
-    cursor: pointer;
-    z-index: 100;
+    display: none !important;
   }
 
   .visible-links {
-    display: table;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    position: static !important;
+    visibility: visible !important;
 
     li {
-      display: table-cell;
-      vertical-align: middle;
+      display: flex !important;
+      align-items: center;
+      position: static !important;
 
       &:first-child {
         font-weight: bold;
