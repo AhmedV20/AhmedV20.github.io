@@ -9,10 +9,10 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # Currently available options are "default", "air"
-title                    : "Web Developer"
+title                    : "Software Engineer"
 title_separator          : "-"
 name                     : &name "Ahmed Mahmoud Hashem"
-description              : &description "Aspiring Web Developer | C# .NET & AI/ML | Fresh Graduate Soon 🎓"
+description              : &description "Aspiring Web Developer specializing in C#/.NET, experienced in full-stack applications, and exploring AI integration in web development."
 url                      : https://ahmedv20.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io" or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "ahmedv20/ahmedv20.github.io"
@@ -24,12 +24,13 @@ author:
   # Biographic information
   avatar           : "profile.png"
   name             : "Ahmed Mahmoud Hashem"
+  title            : &title "Software Engineer"
   pronouns         : # example: "she/her"  
-  bio              : "Aspiring Web Developer | C# .NET & AI/ML | Fresh Graduate Soon 🎓"
-  location         : "Earth"
-  employer         : "Red Brick University"
+  bio              : "Aspiring Web Developer specializing in C#/.NET, experienced in full-stack applications, and exploring AI/ML integration in web development."
+  location         : &location "Egypt, Sohag"
+  employer         : "New Assiut University of Technology"
   uri              : # URL
-  email            : "none@example.org" 
+  email            : "ahmed.mahmoud.dev@gmail.com" 
 
   # Academic websites
   academia         : # URL
