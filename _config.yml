@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-site_theme               : "default" # Currently available options are "default", "air"
+site_theme               : "theme_dark" # Currently available options are "default", "air", "theme_dark", "theme_light"
 title                    : "Software Engineer"
 title_separator          : "-"
 name                     : &name "Ahmed Mahmoud Hashem"

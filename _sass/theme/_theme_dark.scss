@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Portfolio Dark Theme - Based on Portfolio Single color scheme
+   ========================================================================== */
+
+/* Portfolio color scheme variables */
+$primary-color              : #0ea5e9;
+$dark-primary-color         : mix(#000, $primary-color, 40%);
+$darker-primary-color       : mix(#000, $primary-color, 60%);
+$light-primary-color        : mix(#fff, $primary-color, 30%);
+
+$background                 : #0c0f11;
+$background-light           : #18181b;
+$background-lighter         : #27272a;
+$text                       : #f8fafc;
+$text-secondary             : #a1a1aa;
+$link                       : #0ea5e9;
+$link-dark                  : mix(#000, $link, 25%);
+$link-light                 : mix(#fff, $link, 25%);
+$footer                     : mix(#000, $background, 30%);
+
+/* Accent colors */
+$accent-green               : #10b981;
+$accent-purple              : #8b5cf6;
+
+/* Color codes used for the site */
+$danger-color               : #ef4444;
+$info-color                 : #0ea5e9;
+$notice-color               : #6b7280;
+$success-color              : #10b981;
+$warning-color              : #f59e0b;
+
+/* Other basic settings for the template */
+$border-radius              : 8px;
+$box-shadow                 : 0 4px 20px rgba(0, 0, 0, 0.15);
+$global-transition          : all 0.3s ease;
+$masthead-height            : 70px;
+$navicon-width              : 28px;
+$navicon-height             : 4px;
+$sidebar-link-max-width     : 250px;
+$sidebar-screen-min-width   : 1024px;
+
+/* Dark theme CSS variables */
+html[data-theme="dark"] {
+    --global-base-color                 : #{$background};
+    --global-bg-color                   : #{$background};
+    --global-footer-bg-color            : #{$footer};
+    --global-border-color               : #{$background-lighter};
+    --global-dark-border-color          : #{$background-light};
+    --global-code-background-color      : #{$background-light};
+    --global-code-text-color            : #{$text};
+    --global-fig-caption-color          : #{$text-secondary};
+    --global-link-color                 : #{$link};
+    --global-link-color-hover           : #{$link-light};
+    --global-link-color-visited         : #{$link-dark};
+    --global-masthead-link-color        : #{$text};
+    --global-masthead-link-color-hover  : #{$link};
+    --global-text-color                 : #{$text};
+    --global-text-color-light           : #{$text-secondary};
+    --global-thead-color                : #{$background-light};
+    
+    /* Portfolio specific variables */
+    --portfolio-bg                      : #{$background};
+    --portfolio-text                    : #{$text};
+    --portfolio-text-secondary          : #{$text-secondary};
+    --portfolio-accent                  : #{$primary-color};
+    --portfolio-accent-green            : #{$accent-green};
+    --portfolio-border                  : #{$background-lighter};
+    --portfolio-card-bg                 : #{$background-light};
+    --portfolio-gradient                : linear-gradient(135deg, #{$primary-color} 0%, #{$accent-green} 50%, #{$accent-purple} 100%);
+    --portfolio-shadow                  : 0 10px 40px rgba(14, 165, 233, 0.2);
+}
+
+/* Default theme (dark) */
+:root {
+    --global-base-color                 : #{$background};
+    --global-bg-color                   : #{$background};
+    --global-footer-bg-color            : #{$footer};
+    --global-border-color               : #{$background-lighter};
+    --global-dark-border-color          : #{$background-light};
+    --global-code-background-color      : #{$background-light};
+    --global-code-text-color            : #{$text};
+    --global-fig-caption-color          : #{$text-secondary};
+    --global-link-color                 : #{$link};
+    --global-link-color-hover           : #{$link-light};
+    --global-link-color-visited         : #{$link-dark};
+    --global-masthead-link-color        : #{$text};
+    --global-masthead-link-color-hover  : #{$link};
+    --global-text-color                 : #{$text};
+    --global-text-color-light           : #{$text-secondary};
+    --global-thead-color                : #{$background-light};
+    
+    /* Portfolio specific variables */
+    --portfolio-bg                      : #{$background};
+    --portfolio-text                    : #{$text};
+    --portfolio-text-secondary          : #{$text-secondary};
+    --portfolio-accent                  : #{$primary-color};
+    --portfolio-accent-green            : #{$accent-green};
+    --portfolio-border                  : #{$background-lighter};
+    --portfolio-card-bg                 : #{$background-light};
+    --portfolio-gradient                : linear-gradient(135deg, #{$primary-color} 0%, #{$accent-green} 50%, #{$accent-purple} 100%);
+    --portfolio-shadow                  : 0 10px 40px rgba(14, 165, 233, 0.2);
+}
