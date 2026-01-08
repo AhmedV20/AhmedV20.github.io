@@ -19,12 +19,17 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   margin: 0;
   padding: 0;
   font-weight: 400;
-  
+
   * {
     box-sizing: border-box;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 700;
   }
 }
@@ -46,7 +51,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   z-index: 1000;
   padding: 1rem 0;
   border-bottom: 1px solid $portfolio-border;
-  
+
   .nav-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -54,40 +59,40 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-    
+
     @media (max-width: 768px) {
       padding: 0 1rem;
     }
   }
-  
+
   .nav-brand h1 {
     font-size: 1.2rem;
     font-weight: 600;
     margin: 0;
     letter-spacing: 0.5px;
   }
-  
+
   .nav-links {
     display: flex;
     gap: 2rem;
-    
+
     @media (max-width: 768px) {
       gap: 1rem;
     }
   }
-  
+
   .nav-link {
     color: $portfolio-text-secondary;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
-    
+
     &:hover,
     &.active {
       color: $portfolio-text;
     }
-    
+
     &.active::after {
       content: '';
       position: absolute;
@@ -107,7 +112,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   @media (max-width: 768px) {
     padding: 5rem 1rem 3rem;
     min-height: 70vh;
@@ -121,7 +126,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   grid-template-columns: 300px 1fr;
   gap: 4rem;
   align-items: center;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -134,51 +139,109 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   position: relative;
   display: flex;
   justify-content: center;
-  
+  align-items: center;
+
   @media (max-width: 768px) {
     margin-bottom: 1.5rem;
   }
-  
+
   .profile-image {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    border: 4px solid transparent;
-    background: $portfolio-gradient;
-    padding: 4px;
     object-fit: cover;
     position: relative;
     z-index: 2;
-    animation: profileGlow 4s ease-in-out infinite alternate;
-    
+    animation: avatarFloat 4s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(14, 165, 233, 0.3);
+
     @media (max-width: 768px) {
       width: 150px;
       height: 150px;
     }
   }
-  
+
+  // Gradient ring - static with pulse animation
   &::before {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+    width: 220px;
+    height: 220px;
     background: $portfolio-gradient;
     border-radius: 50%;
     z-index: 1;
-    animation: borderRotate 4s linear infinite;
+    animation: ringPulse 3s ease-in-out infinite;
+
+    @media (max-width: 768px) {
+      width: 170px;
+      height: 170px;
+    }
+  }
+
+  // Outer glow ring
+  &::after {
+    content: '';
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    background: transparent;
+    border: 2px solid rgba(14, 165, 233, 0.2);
+    border-radius: 50%;
+    z-index: 0;
+    animation: glowRing 4s ease-in-out infinite;
+
+    @media (max-width: 768px) {
+      width: 190px;
+      height: 190px;
+    }
   }
 }
 
-@keyframes profileGlow {
-  0% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.4); }
-  100% { box-shadow: 0 0 35px rgba(139, 92, 246, 0.5); }
+// Gentle floating animation for avatar
+@keyframes avatarFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 30px rgba(14, 165, 233, 0.3);
+  }
+
+  50% {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(14, 165, 233, 0.4), 0 0 35px rgba(139, 92, 246, 0.3);
+  }
 }
 
-@keyframes borderRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+// Subtle pulse for gradient ring
+@keyframes ringPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+}
+
+// Outer glow ring animation
+@keyframes glowRing {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+    border-color: rgba(14, 165, 233, 0.2);
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+    border-color: rgba(16, 185, 129, 0.3);
+  }
 }
 
 .hero-greeting {
@@ -189,7 +252,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  
+
   @media (max-width: 768px) {
     font-size: 2.2rem;
   }
@@ -201,12 +264,12 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   margin-bottom: 1rem;
   line-height: 1.5;
   font-weight: 500;
-  
+
   .highlight {
     color: $portfolio-accent;
     font-weight: 600;
   }
-  
+
   @media (max-width: 768px) {
     font-size: 1.1rem;
   }
@@ -226,8 +289,17 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3); }
-  50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4); }
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+  }
 }
 
 .hero-info {
@@ -237,7 +309,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   gap: 2rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
-  
+
   @media (max-width: 768px) {
     justify-content: center;
     gap: 1rem;
@@ -251,7 +323,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   gap: 0.5rem;
   color: $portfolio-text-secondary;
   font-size: 0.95rem;
-  
+
   i {
     color: $portfolio-accent;
   }
@@ -275,14 +347,14 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   border-radius: 6px;
   transition: all 0.3s ease;
   font-size: 0.9rem;
-  
+
   &:hover {
     color: $portfolio-text;
     border-color: $portfolio-accent;
     background-color: rgba(14, 165, 233, 0.1);
     transform: translateY(-2px);
   }
-  
+
   i {
     font-size: 1rem;
   }
@@ -296,7 +368,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   margin-top: 2rem;
   justify-content: center;
   max-width: 100%;
-  
+
   @media (max-width: 768px) {
     gap: 0.8rem;
     margin-top: 1.5rem;
@@ -313,30 +385,30 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   border: 1px solid rgba(39, 39, 42, 0.5);
   transition: all 0.3s ease;
   min-width: fit-content;
-  
+
   &:hover {
     transform: translateY(-2px);
     background-color: rgba(14, 165, 233, 0.1);
     border-color: rgba(14, 165, 233, 0.3);
   }
-  
+
   i {
     font-size: 1.5rem;
   }
-  
+
   span {
     font-size: 0.9rem;
     font-weight: 600;
     color: $portfolio-text;
   }
-  
+
   @media (max-width: 768px) {
     padding: 0.4rem 0.8rem;
-    
+
     i {
       font-size: 1.3rem;
     }
-    
+
     span {
       font-size: 0.8rem;
     }
@@ -348,7 +420,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
-  
+
   @media (max-width: 768px) {
     padding: 0 1rem;
   }
@@ -361,7 +433,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   margin-bottom: 3rem;
   text-align: center;
   color: $portfolio-text;
-  
+
   @media (max-width: 768px) {
     font-size: 1.2rem;
     margin-bottom: 2rem;
@@ -377,7 +449,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   max-width: 900px;
   margin: 0 auto;
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -386,7 +458,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
     bottom: 0;
     width: 2px;
     background: $portfolio-border;
-    
+
     @media (max-width: 768px) {
       left: 20px;
     }
@@ -399,7 +471,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   gap: 2rem;
   padding-bottom: 2rem;
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -410,12 +482,12 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
     background: $portfolio-accent;
     border-radius: 50%;
     border: 3px solid $portfolio-bg;
-    
+
     @media (max-width: 768px) {
       left: 15px;
     }
   }
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -428,7 +500,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   color: $portfolio-accent;
   font-weight: 600;
   text-align: right;
-  
+
   @media (max-width: 768px) {
     font-size: 0.8rem;
     text-align: left;
@@ -442,14 +514,14 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
     margin-bottom: 0.3rem;
     color: $portfolio-text;
   }
-  
+
   .timeline-company {
     color: $portfolio-accent-green;
     font-weight: 600;
     margin-bottom: 0.8rem;
     font-size: 1rem;
   }
-  
+
   .timeline-description {
     color: $portfolio-text-secondary;
     line-height: 1.6;
@@ -476,7 +548,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   border: 1px solid $portfolio-border;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  
+
   &:hover {
     transform: translateY(-8px) scale(1.02);
     border-color: $portfolio-accent;
@@ -489,18 +561,18 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   height: 250px;
   overflow: hidden;
   position: relative;
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
   }
-  
+
   .project-card:hover & img {
     transform: scale(1.08);
   }
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -512,7 +584,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
+
   .project-card:hover &::after {
     opacity: 1;
   }
@@ -553,13 +625,13 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   font-weight: 600;
   border: 1px solid rgba(14, 165, 233, 0.2);
   transition: all 0.3s ease;
-  
+
   &:nth-child(even) {
     background-color: rgba(16, 185, 129, 0.15);
     color: $portfolio-accent-green;
     border-color: rgba(16, 185, 129, 0.2);
   }
-  
+
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -569,7 +641,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
 .project-links {
   display: flex;
   gap: 0.8rem;
-  
+
   @media (max-width: 768px) {
     gap: 0.6rem;
   }
@@ -588,23 +660,23 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   font-weight: 600;
   flex: 1;
   justify-content: center;
-  
+
   &.primary {
     background: linear-gradient(135deg, $portfolio-accent 0%, darken($portfolio-accent, 10%) 100%);
     color: $portfolio-bg;
-    
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
       background: linear-gradient(135deg, lighten($portfolio-accent, 5%) 0%, $portfolio-accent 100%);
     }
   }
-  
+
   &:last-child {
     background: transparent;
     border: 1px solid $portfolio-border;
     color: $portfolio-text-secondary;
-    
+
     &:hover {
       color: $portfolio-text;
       border-color: $portfolio-accent;
@@ -612,7 +684,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
       transform: translateY(-2px);
     }
   }
-  
+
   i {
     font-size: 0.9rem;
   }
@@ -632,7 +704,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   justify-content: center;
   gap: 0.8rem;
   margin-bottom: 1rem;
-  
+
   i {
     color: $portfolio-accent;
     font-size: 1.1rem;
@@ -644,7 +716,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   text-decoration: none;
   font-size: 1rem;
   transition: all 0.3s ease;
-  
+
   &:hover {
     color: $portfolio-accent;
     transform: translateY(-1px);
@@ -654,11 +726,11 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
 .footer-copyright {
   color: $portfolio-text-secondary;
   font-size: 0.9rem;
-  
+
   a {
     color: $portfolio-accent;
     text-decoration: none;
-    
+
     &:hover {
       text-decoration: underline;
     }
@@ -670,16 +742,16 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
   .hero-greeting {
     font-size: 1.8rem;
   }
-  
+
   .hero-description {
     font-size: 1rem;
   }
-  
+
   .section-title {
     font-size: 1.2rem;
     margin-bottom: 2rem;
   }
-  
+
   .experience-section,
   .projects-section {
     padding: 3rem 0;
@@ -692,6 +764,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -703,6 +776,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -714,6 +788,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
     opacity: 0;
     transform: translateX(30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -724,30 +799,30 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
 .fade-in {
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  
+
   &.visible {
     opacity: 1;
   }
-  
+
   &.fade-up {
     transform: translateY(40px);
-    
+
     &.visible {
       transform: translateY(0);
     }
   }
-  
+
   &.fade-left {
     transform: translateX(-40px);
-    
+
     &.visible {
       transform: translateX(0);
     }
   }
-  
+
   &.fade-right {
     transform: translateX(40px);
-    
+
     &.visible {
       transform: translateX(0);
     }
@@ -756,9 +831,17 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
 
 // Staggered animation delays
 .project-card {
-  &:nth-child(1) { transition-delay: 0.1s; }
-  &:nth-child(2) { transition-delay: 0.3s; }
-  &:nth-child(3) { transition-delay: 0.5s; }
+  &:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+
+  &:nth-child(2) {
+    transition-delay: 0.3s;
+  }
+
+  &:nth-child(3) {
+    transition-delay: 0.5s;
+  }
 }
 
 // Enhanced focus states for accessibility
@@ -778,8 +861,13 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
 }
 
 @keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 // Custom scrollbar
@@ -794,7 +882,7 @@ $portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
 ::-webkit-scrollbar-thumb {
   background: $portfolio-border;
   border-radius: 4px;
-  
+
   &:hover {
     background: $portfolio-accent;
   }
@@ -807,6 +895,7 @@ html {
 
 // Reduced motion preferences
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -815,15 +904,15 @@ html {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .profile-image-container::before {
     animation: none !important;
   }
-  
+
   .profile-image {
     animation: none !important;
   }
-  
+
   .hero-badge {
     animation: none !important;
   }
@@ -842,13 +931,13 @@ html {
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   .page__content {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   .masthead {
     display: none !important;
   }
@@ -861,7 +950,7 @@ html {
   justify-content: center;
   align-items: center;
   background: linear-gradient(180deg, rgba(12, 15, 17, 0) 0%, rgba(12, 15, 17, 0.3) 50%, rgba(12, 15, 17, 0.6) 100%);
-  
+
   @media (max-width: 768px) {
     padding: 1.5rem 0;
   }
@@ -875,14 +964,14 @@ html {
   justify-content: center;
   cursor: pointer;
   animation: bounce 2s infinite;
-  
+
   i {
     font-size: 2rem;
     color: $portfolio-accent;
     text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
     transition: all 0.3s ease;
   }
-  
+
   &:hover i {
     color: $portfolio-accent-green;
     transform: scale(1.2);
@@ -890,12 +979,19 @@ html {
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-10px);
   }
+
   60% {
     transform: translateY(-5px);
   }
