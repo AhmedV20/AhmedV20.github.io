@@ -8,104 +8,196 @@
 <body class="layout--portfolio-single">
   {% include browser-upgrade.html %}
   <div class="portfolio-container">
-    <!-- Navigation -->
-    <nav class="portfolio-nav">
+    <!-- Header -->
+    <header class="portfolio-nav" role="banner">
       <div class="nav-content">
         <div class="nav-brand">
-          <a href="{{ site.url }}" style="color: #fff;">
-            <h1>Software Engineer</h1>
+          <a href="{{ site.url }}" aria-label="Home">
+            <div class="brand-logo"
+              style="display: flex; align-items: center; justify-content: center; background: linear-gradient(to right, #00f2ff, #00d9ff);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <span class="brand-text">Ahmed.dev</span>
           </a>
         </div>
-        <div class="nav-links">
-          <a href="#experience" class="nav-link">Timeline</a>
+        <nav class="nav-links" role="navigation">
+          <a href="/" class="nav-link">Home</a>
           <a href="#projects" class="nav-link">Projects</a>
+          <a href="mailto:{{ site.author.email }}" class="nav-link">Contact</a>
+        </nav>
+        <div class="nav-controls">
+          <!-- Theme Toggle -->
+          <div class="theme-dropdown" id="theme-dropdown-container">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </button>
+            <div class="theme-dropdown-menu" id="theme-dropdown-menu">
+              <div class="theme-dropdown-item" data-theme="light">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="m4.93 4.93 1.41 1.41"></path>
+                  <path d="m17.66 17.66 1.41 1.41"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                  <path d="m6.34 17.66-1.41 1.41"></path>
+                  <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                Light
+              </div>
+              <div class="theme-dropdown-item" data-theme="dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+                Dark
+              </div>
+              <div class="theme-dropdown-item" data-theme="system">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                System
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
-      <div class="hero-content fade-in fade-up">
-        <div class="profile-image-container">
-          <img src="{{ site.author.avatar | prepend: '/images/' | prepend: site.baseurl }}" alt="{{ site.author.name }}"
-            class="profile-image">
+      <div class="hero-content">
+        <div class="hero-header-row">
+          <div class="profile-image-container">
+            <img src="{{ site.author.avatar | prepend: '/images/' | prepend: site.baseurl }}"
+              alt="{{ site.author.name }}" class="profile-image avatar-img" fetchpriority="high">
+          </div>
+          <h1>Hey, I'm <span class="gradient-text">{{ site.author.name }}</span>
+            <div style="display:inline-block">✨</div>
+            <br>A <span class="gradient-text">Software Engineer</span>
+          </h1>
         </div>
-        <div class="hero-text">
-          <h2 class="hero-greeting">I'm {{ site.author.name }}.</h2>
-          <p class="hero-description">{{ site.author.bio | replace: 'C#/.NET', '<span class="highlight">C#/.NET</span>'
-            | replace: 'AI/ML', '<span class="highlight">AI/ML</span>' }}</p>
-          <div class="hero-badge">✨ Ready to work</div>
-          <div class="hero-info">
-            <div class="hero-location">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>{{ site.author.location }}</span>
-            </div>
-            <div class="social-links">
-              {% if site.author.linkedin %}
-              <a href="https://linkedin.com/in/{{ site.author.linkedin }}" class="social-link">
-                <i class="fab fa-linkedin"></i> LinkedIn
-              </a>
-              {% endif %}
-              {% if site.author.github %}
-              <a href="https://github.com/{{ site.author.github }}" class="social-link">
-                <i class="fab fa-github"></i> GitHub
-              </a>
-              {% endif %}
-              {% if site.author.email %}
-              <a href="mailto:{{ site.author.email }}" class="social-link">
-                <i class="fas fa-envelope"></i> Email
-              </a>
-              {% endif %}
-            </div>
+
+        <p class="hero-description">
+          Aspiring Web Developer specializing in <span class="font-bold">C#/.NET backend</span>, experienced in <span
+            class="font-bold">full-stack applications</span>, and exploring AI/ML integration in web development.
+        </p>
+
+        <div class="hero-actions">
+          <div class="action-buttons">
+            <a href="mailto:{{ site.author.email }}" class="btn btn-contact">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"></path>
+              </svg>
+              Contact Me
+            </a>
+            <a href="#projects" class="btn btn-contact" style="box-shadow: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 7v10"></path>
+                <path d="M6 5v14"></path>
+                <rect width="12" height="18" x="10" y="3" rx="2"></rect>
+              </svg>
+              View Projects
+            </a>
           </div>
 
-          <!-- Tech Stack in Hero -->
-          <div class="tech-stack-hero">
-            <div class="tech-item-hero">
-              <i class="fas fa-code" style="color: #239120;"></i>
-              <span>C#</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fab fa-microsoft" style="color: #512BD4;"></i>
-              <span>ASP.NET Core</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fab fa-angular" style="color: #DD0031;"></i>
-              <span>Angular</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fas fa-database" style="color: #CC2927;"></i>
-              <span>SQL Server</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fas fa-database" style="color: #336791;"></i>
-              <span>PostgreSQL</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fab fa-docker" style="color: #2496ed;"></i>
-              <span>Docker</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fab fa-github" style="color: #2088FF;"></i>
-              <span>GitHub Actions</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fab fa-git-alt" style="color: #F05032;"></i>
-              <span>Git</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fab fa-github" style="color: #24292e;"></i>
-              <span>GitHub</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fas fa-file-code" style="color: #85EA2D;"></i>
-              <span>Swagger</span>
-            </div>
-            <div class="tech-item-hero">
-              <i class="fas fa-paper-plane" style="color: #FF6C37;"></i>
-              <span>Postman</span>
-            </div>
+          <div class="social-links-row">
+            <div class="separator"></div>
+            {% if site.author.github %}
+            <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer"
+              aria-label="Github">
+              <i class="fab fa-github"></i>
+            </a>
+            {% endif %}
+            {% if site.author.linkedin %}
+            <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener noreferrer"
+              aria-label="Linkedin">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            {% endif %}
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Cubes Section -->
+    <section class="tech-stack-section">
+      <h2 class="tech-title">Tech Stack</h2>
+      <div class="tech-cube-grid">
+        <!-- Backend -->
+        <div class="tech-cube">
+          <i class="fas fa-code"></i>
+          <span>C#</span>
+        </div>
+        <div class="tech-cube">
+          <i class="fab fa-microsoft"></i>
+          <span>.NET</span>
+        </div>
+        <div class="tech-cube">
+          <i class="fas fa-database"></i>
+          <span>SQL</span>
+        </div>
+        <div class="tech-cube">
+          <i class="fas fa-database"></i>
+          <span>Postgres</span>
+        </div>
+
+        <!-- Frontend -->
+        <div class="tech-cube">
+          <i class="fab fa-angular"></i>
+          <span>Angular</span>
+        </div>
+        <div class="tech-cube">
+          <i class="fab fa-js"></i>
+          <span>JS / TS</span>
+        </div>
+
+        <!-- Tools -->
+        <div class="tech-cube">
+          <i class="fab fa-docker"></i>
+          <span>Docker</span>
+        </div>
+        <div class="tech-cube">
+          <i class="fab fa-git-alt"></i>
+          <span>Git</span>
+        </div>
+        <div class="tech-cube">
+          <i class="fas fa-file-code"></i>
+          <span>Swagger</span>
+        </div>
+        <div class="tech-cube">
+          <i class="fas fa-paper-plane"></i>
+          <span>Postman</span>
         </div>
       </div>
     </section>
@@ -177,30 +269,25 @@
           <div class="project-card fade-in fade-up">
             {% if post.image %}
             <div class="project-image">
-              <img src="{{ post.image | prepend: '/images/' | prepend: site.baseurl }}" alt="{{ post.title }}">
+              <a href="{{ post.url | relative_url }}" style="display: block; width: 100%; height: 100%;">
+                <img src="{{ post.image | prepend: '/images/' | prepend: site.baseurl }}" alt="{{ post.title }}">
+              </a>
             </div>
             {% endif %}
             <div class="project-content">
-              <h4 class="project-title">{{ post.title }}</h4>
-              <p class="project-description">{{ post.excerpt | strip_html | truncate: 500 }}</p>
-              <div class="project-tech">
-                {% if post.technologies %}
-                {% for tech in post.technologies %}
-                <span class="tech-tag">{{ tech }}</span>
-                {% endfor %}
-                {% endif %}
-              </div>
-              <div class="project-links">
-                {% if post.demo %}
-                <a href="{{ post.demo }}" class="project-link">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
+              <h4 class="project-title">
+                <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: inherit;">{{ post.title
+                  }}</a>
+              </h4>
+
+              <div class="project-footer">
+                <div class="visit-info">
+                  <span class="visit-msg">Visit to see all info</span>
+                  <i class="fas fa-long-arrow-alt-down visit-arrow"></i>
+                </div>
+                <a href="{{ post.url | relative_url }}" class="project-link details-btn">
+                  Details <i class="fas fa-arrow-right"></i>
                 </a>
-                {% endif %}
-                {% if post.github %}
-                <a href="{{ post.github }}" class="project-link">
-                  <i class="fab fa-github"></i> Source Code
-                </a>
-                {% endif %}
               </div>
             </div>
           </div>
@@ -209,17 +296,43 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <footer class="contact-section" id="contact">
-      <div class="section-content">
-        <!-- <div class="contact-info">
-            <i class="fas fa-sitemap"></i>
-            <a href="/sitemap" class="contact-email">Sitemap</a>
+    <!-- New Split Footer -->
+    <footer class="split-footer" id="contact">
+      <div class="footer-content">
+        <div class="footer-top">
+          <!-- Left Side: Name -->
+          <div class="footer-info">
+            <div class="footer-name-wrap">
+              <h3 class="footer-name">{{ site.author.name }}</h3>
+            </div>
+            <div class="footer-location-wrap">
+              <div class="footer-location">
+                <img src="https://flagcdn.com/w40/eg.png" alt="Egypt" class="egypt-flag">
+                based in Egypt
+              </div>
+            </div>
           </div>
-          -->
-        <div class="footer-copyright">
-          © 2025 {{ site.author.name }}. Built with <a href="https://jekyllrb.com/" target="_blank"
-            rel="noopener">Jekyll</a>
+
+          <!-- Divider -->
+          <div class="footer-divider"></div>
+
+          <!-- Right Side: Social -->
+          <div class="footer-social">
+            {% if site.author.github %}
+            <a href="https://github.com/{{ site.author.github }}" target="_blank" aria-label="Github"><i
+                class="fab fa-github"></i></a>
+            {% endif %}
+            {% if site.author.linkedin %}
+            <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" aria-label="Linkedin"><i
+                class="fab fa-linkedin"></i></a>
+            {% endif %}
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:{{ site.author.email }}" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Ahmed. All rights are reserved.</p>
         </div>
       </div>
     </footer>
@@ -293,6 +406,55 @@
       const img = new Image();
       img.src = src;
     });
+
+    // Theme logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeDropdown = document.getElementById('theme-dropdown-menu');
+    const themeItems = document.querySelectorAll('.theme-dropdown-item');
+    const html = document.documentElement;
+    const body = document.body;
+
+    function setTheme(theme) {
+      if (theme === 'system') {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          body.classList.add('dark');
+        } else {
+          body.classList.remove('dark');
+        }
+        localStorage.setItem('theme', 'system');
+      } else if (theme === 'dark') {
+        body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+
+      themeItems.forEach(item => {
+        item.classList.toggle('active', item.dataset.theme === theme);
+      });
+    }
+
+    // Init
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+    setTheme(savedTheme);
+
+    // Toggle Dropdown
+    themeToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      themeDropdown.classList.toggle('show');
+    });
+
+    // Select Theme
+    themeItems.forEach(item => {
+      item.addEventListener('click', () => {
+        setTheme(item.dataset.theme);
+        themeDropdown.classList.remove('show');
+      });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', () => themeDropdown.classList.remove('show'));
   </script>
 </body>
 

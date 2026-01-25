@@ -226,7 +226,7 @@ collections:
     permalink: /:collection/:path/
   portfolio:
     output: true
-    permalink: /:collection/:path/
+    permalink: /projects/:slug/
   talks:
     output: true
     permalink: /:collection/:path/
@@ -275,7 +275,7 @@ defaults:
       path: ""
       type: portfolio
     values:
-      layout: single
+      layout: project_details
       author_profile: true
       share: true
       comment: true

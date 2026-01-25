@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="{{ site.locale | slice: 0,2 | default: " en" }}" class="no-js">
+
+<head>
+    {% include head.html %}
+    <style>
+        /* Project Details Specific Styles */
+        /* Sticky Footer & Layout Override */
+        body.layout--project-details {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-details-wrapper {
+            flex-grow: 1;
+            /* Pushes footer down */
+            width: 100%;
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .small-btn {
+            padding: 0.6rem 1.4rem;
+            font-size: 0.9rem;
+        }
+
+        .project-split-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* ... rest of styles ... */
+        @media (min-width: 992px) {
+            .project-split-layout {
+                grid-template-columns: 1.2fr 0.8fr;
+                gap: 4rem;
+            }
+        }
+
+        /* Ensure gallery controls don't overlay buttons if strict overflow was on */
+        .gallery-container {
+            overflow: visible;
+            /* Or just ensure buttons are outside, which they are now */
+            /* Keep existing styles */
+            position: relative;
+            border-radius: 1rem;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-viewport {
+            position: relative;
+            /* Maintain Aspect Ratio but handle overflow */
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            border-radius: 1rem;
+            /* radius on viewport to clip images */
+        }
+
+        /* ... standard gallery styles ... */
+        .gallery-slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .gallery-slide.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ... nav buttons match previous ... */
+        .gallery-nav-btn {
+            position: absolute;
+            bottom: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-nav-btn:hover {
+            background: hsl(var(--primary));
+            color: white;
+            border-color: hsl(var(--primary));
+            transform: scale(1.1);
+        }
+
+        .nav-prev {
+            left: 20px;
+        }
+
+        .nav-next {
+            right: 20px;
+        }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(128, 128, 128, 0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .gallery-dot.active {
+            background: hsl(var(--primary));
+            transform: scale(1.2);
+        }
+
+        /* Right column */
+        .project-info-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid hsl(var(--border));
+            padding-bottom: 1.5rem;
+        }
+
+        .project-title-large {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background-image: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-subtitle {
+            font-size: 1.1rem;
+            color: hsl(var(--muted-foreground));
+            font-weight: 500;
+        }
+
+        .info-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .info-label {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: hsl(var(--foreground));
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .tech-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tech-pill {
+            background: hsl(var(--secondary));
+            color: hsl(var(--foreground));
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid hsl(var(--border));
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            padding: 0.8rem 1.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+
+<body class="layout--portfolio-single layout--project-details">
+    {% include browser-upgrade.html %}
+    <div class="portfolio-container">
+        <!-- Header (Copied from portfolio-single for consistency) -->
+        <header class="portfolio-nav" role="banner">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <a href="{{ site.url }}" aria-label="Home">
+                        <div class="brand-logo"
+                            style="display: flex; align-items: center; justify-content: center; background: linear-gradient(to right, #00f2ff, #00d9ff);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+                        <span class="brand-text">Ahmed.dev</span>
+                    </a>
+                </div>
+                <nav class="nav-links" role="navigation">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/#projects" class="nav-link">Projects</a>
+                    <a href="mailto:{{ site.author.email }}" class="nav-link">Contact</a>
+                </nav>
+                <div class="nav-controls">
+                    <!-- Theme Toggle -->
+                    <div class="theme-dropdown" id="theme-dropdown-container">
+                        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="sun-icon">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2"></path>
+                                <path d="M12 20v2"></path>
+                                <path d="m4.93 4.93 1.41 1.41"></path>
+                                <path d="m17.66 17.66 1.41 1.41"></path>
+                                <path d="M2 12h2"></path>
+                                <path d="M20 12h2"></path>
+                                <path d="m6.34 17.66-1.41 1.41"></path>
+                                <path d="m19.07 4.93-1.41 1.41"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="moon-icon">
+                                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                            </svg>
+                        </button>
+                        <div class="theme-dropdown-menu" id="theme-dropdown-menu">
+                            <div class="theme-dropdown-item" data-theme="light">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <path d="M12 2v2"></path>
+                                    <path d="M12 20v2"></path>
+                                    <path d="m4.93 4.93 1.41 1.41"></path>
+                                    <path d="m17.66 17.66 1.41 1.41"></path>
+                                    <path d="M2 12h2"></path>
+                                    <path d="M20 12h2"></path>
+                                    <path d="m6.34 17.66-1.41 1.41"></path>
+                                    <path d="m19.07 4.93-1.41 1.41"></path>
+                                </svg>
+                                Light
+                            </div>
+                            <div class="theme-dropdown-item" data-theme="dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                                </svg>
+                                Dark
+                            </div>
+                            <div class="theme-dropdown-item" data-theme="system">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                                System
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Project Details Content -->
+        <main class="project-details-wrapper">
+            <!-- Breadcrumbs -->
+            <div style="margin-bottom: 2rem;">
+                <a href="/" style="color: hsl(var(--muted-foreground)); text-decoration: none;">Home</a>
+                <span style="color: hsl(var(--muted-foreground)); margin: 0 0.5rem;">/</span>
+                <span style="color: hsl(var(--foreground)); font-weight: 500;">{{ page.title }}</span>
+            </div>
+
+            <div class="project-split-layout">
+                <!-- Left: Gallery -->
+                <div class="left-column">
+                    <div class="gallery-container">
+                        <div class="gallery-viewport" id="gallery-viewport">
+                            <!-- Images -->
+                            {% if page.image %}
+                            <img src="{{ page.image | prepend: '/images/' | prepend: site.baseurl }}"
+                                class="gallery-slide active" alt="{{ page.title }}">
+                            {% endif %}
+                            {% if page.gallery %}
+                            {% for img in page.gallery %}
+                            {% if img != page.image %} <!-- Avoid duplicate if user put cover in gallery -->
+                            <img src="{{ img | prepend: '/images/' | prepend: site.baseurl }}" class="gallery-slide"
+                                alt="Gallery Image">
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <!-- Controls -->
+                        <button class="gallery-nav-btn nav-prev" onclick="moveGallery(-1)" aria-label="Previous">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-nav-btn nav-next" onclick="moveGallery(1)" aria-label="Next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <!-- Dots -->
+                        <div class="gallery-dots" id="gallery-dots"></div>
+                    </div>
+
+                    <!-- Actions (Moved below gallery) -->
+                    <div class="info-action"
+                        style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+                        {% if page.demo %}
+                        <a href="{{ page.demo }}" target="_blank" class="action-btn small-btn">
+                            <i class="fas fa-globe"></i> Visit Project
+                        </a>
+                        {% endif %}
+                        {% if page.github %}
+                        <a href="{{ page.github }}" target="_blank" class="action-btn small-btn"
+                            style="background: transparent; border: 2px solid hsl(var(--border)); color: hsl(var(--foreground));">
+                            <i class="fab fa-github"></i> Source Code
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Right: Info -->
+                <div class="project-info-panel">
+                    <header class="project-info-header">
+                        <h1 class="project-title-large">{{ page.title }}</h1>
+                        <!-- Could be dynamic if added to frontmatter -->
+                    </header>
+
+                    <div class="info-section">
+                        <h3 class="info-label">What Is It?</h3>
+                        <div class="info-text">
+                            <!-- Use excerpt if content is empty (common in portfolio data usage) -->
+                            {{ page.excerpt | markdownify }}
+                            {{ content }}
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3 class="info-label">Tools & Technologies</h3>
+                        <div class="tech-pills">
+                            {% if page.technologies %}
+                            {% for tech in page.technologies %}
+                            <span class="tech-pill">{{ tech }}</span>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- New Split Footer -->
+        <footer class="split-footer" id="contact">
+            <div class="footer-content">
+                <div class="footer-top">
+                    <!-- Left Side: Name -->
+                    <div class="footer-info">
+                        <div class="footer-name-wrap">
+                            <h3 class="footer-name">{{ site.author.name }}</h3>
+                        </div>
+                        <div class="footer-location-wrap">
+                            <div class="footer-location">
+                                <img src="https://flagcdn.com/w40/eg.png" alt="Egypt" class="egypt-flag">
+                                based in Egypt
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="footer-divider"></div>
+
+                    <!-- Right Side: Social -->
+                    <div class="footer-social">
+                        {% if site.author.github %}
+                        <a href="https://github.com/{{ site.author.github }}" target="_blank" aria-label="Github"><i
+                                class="fab fa-github"></i></a>
+                        {% endif %}
+                        {% if site.author.linkedin %}
+                        <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank"
+                            aria-label="Linkedin"><i class="fab fa-linkedin"></i></a>
+                        {% endif %}
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="mailto:{{ site.author.email }}" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>© 2026 Ahmed. All rights are reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    {% include scripts.html %}
+
+    <!-- Gallery & Theme Logic -->
+    <script>
+        // Theme Logic (Reused)
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeDropdown = document.getElementById('theme-dropdown-menu');
+        const themeItems = document.querySelectorAll('.theme-dropdown-item');
+        const body = document.body;
+
+        function setTheme(theme) {
+            if (theme === 'system') {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    body.classList.add('dark');
+                } else {
+                    body.classList.remove('dark');
+                }
+                localStorage.setItem('theme', 'system');
+            } else if (theme === 'dark') {
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            themeItems.forEach(item => item.classList.toggle('active', item.dataset.theme === theme));
+        }
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                themeDropdown.classList.toggle('show');
+            });
+        }
+
+        themeItems.forEach(item => {
+            item.addEventListener('click', () => {
+                setTheme(item.dataset.theme);
+                themeDropdown.classList.remove('show');
+            });
+        });
+        document.addEventListener('click', () => {
+            if (themeDropdown) themeDropdown.classList.remove('show');
+        });
+
+        // --- Gallery Logic ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.gallery-slide');
+        const dotsContainer = document.getElementById('gallery-dots');
+
+        if (slides.length > 0) {
+            // Create Dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('gallery-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(index);
+                dotsContainer.appendChild(dot);
+            });
+
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                document.querySelectorAll('.gallery-dot').forEach(dot => dot.classList.remove('active'));
+
+                currentSlide = (n + slides.length) % slides.length;
+
+                slides[currentSlide].classList.add('active');
+                dotsContainer.children[currentSlide].classList.add('active');
+            }
+
+            function moveGallery(n) {
+                showSlide(currentSlide + n);
+            }
+
+            function goToSlide(n) {
+                showSlide(n);
+            }
+        }
+    </script>
+</body>
+
+</html>

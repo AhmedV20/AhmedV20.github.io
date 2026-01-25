@@ -3,69 +3,70 @@
    ========================================================================== */
 
 /* Portfolio color scheme variables - Light variant */
-$primary-color              : #0ea5e9;
-$dark-primary-color         : mix(#000, $primary-color, 40%);
-$darker-primary-color       : mix(#000, $primary-color, 60%);
-$light-primary-color        : mix(#fff, $primary-color, 30%);
+$primary-color : #0ea5e9;
+$dark-primary-color : #0284c7;
+$darker-primary-color : #075985;
+$light-primary-color : #f0f9ff;
 
-$background                 : #ffffff;
-$background-light           : #f8fafc;
-$background-lighter         : #e2e8f0;
-$text                       : #1e293b;
-$text-secondary             : #64748b;
-$link                       : #0ea5e9;
-$link-dark                  : mix(#000, $link, 25%);
-$link-light                 : mix(#fff, $link, 25%);
-$footer                     : #f1f5f9;
+$background : #ffffff;
+$background-light : #f8fafc;
+$background-lighter : #e2e8f0;
+$text : #1e293b;
+$text-secondary : #64748b;
+$link : #0ea5e9;
+$link-dark : mix(#000, $link, 25%);
+$link-light : mix(#fff, $link, 25%);
+$footer : #f1f5f9;
 
 /* Accent colors */
-$accent-green               : #10b981;
-$accent-purple              : #8b5cf6;
+$accent-green : #10b981;
+$accent-teal : #14b8a6;
+$accent-purple : #8b5cf6;
 
 /* Color codes used for the site */
-$danger-color               : #ef4444;
-$info-color                 : #0ea5e9;
-$notice-color               : #6b7280;
-$success-color              : #10b981;
-$warning-color              : #f59e0b;
+$danger-color : #ef4444;
+$info-color : #0ea5e9;
+$notice-color : #6b7280;
+$success-color : #10b981;
+$warning-color : #f59e0b;
 
 /* Other basic settings for the template */
-$border-radius              : 8px;
-$box-shadow                 : 0 4px 20px rgba(0, 0, 0, 0.08);
-$global-transition          : all 0.3s ease;
-$masthead-height            : 70px;
-$navicon-width              : 28px;
-$navicon-height             : 4px;
-$sidebar-link-max-width     : 250px;
-$sidebar-screen-min-width   : 1024px;
+$border-radius : 8px;
+$box-shadow : 0 4px 20px rgba(0, 0, 0, 0.08);
+$global-transition : all 0.3s ease;
+$masthead-height : 70px;
+$navicon-width : 28px;
+$navicon-height : 4px;
+$sidebar-link-max-width : 250px;
+$sidebar-screen-min-width : 1024px;
 
 /* Light theme CSS variables */
 html[data-theme="light"] {
-    --global-base-color                 : #{$background};
-    --global-bg-color                   : #{$background};
-    --global-footer-bg-color            : #{$footer};
-    --global-border-color               : #{$background-lighter};
-    --global-dark-border-color          : #{$background-light};
-    --global-code-background-color      : #{$background-light};
-    --global-code-text-color            : #{$text};
-    --global-fig-caption-color          : #{$text-secondary};
-    --global-link-color                 : #{$link};
-    --global-link-color-hover           : #{$link-dark};
-    --global-link-color-visited         : #{$darker-primary-color};
-    --global-masthead-link-color        : #{$text};
-    --global-masthead-link-color-hover  : #{$link};
-    --global-text-color                 : #{$text};
-    --global-text-color-light           : #{$text-secondary};
-    --global-thead-color                : #{$background-light};
-    
+    --global-base-color : #{$background};
+    --global-bg-color : #{$background};
+    --global-footer-bg-color : #{$footer};
+    --global-border-color : #{$background-lighter};
+    --global-dark-border-color : #{$background-light};
+    --global-code-background-color : #{$background-light};
+    --global-code-text-color : #{$text};
+    --global-fig-caption-color : #{$text-secondary};
+    --global-link-color : #{$link};
+    --global-link-color-hover : #{$link-dark};
+    --global-link-color-visited : #{$darker-primary-color};
+    --global-masthead-link-color : #{$text};
+    --global-masthead-link-color-hover : #{$link};
+    --global-text-color : #{$text};
+    --global-text-color-light : #{$text-secondary};
+    --global-thead-color : #{$background-light};
+
     /* Portfolio specific variables - Light theme */
-    --portfolio-bg                      : #{$background};
-    --portfolio-text                    : #{$text};
-    --portfolio-text-secondary          : #{$text-secondary};
-    --portfolio-accent                  : #{$primary-color};
-    --portfolio-accent-green            : #{$accent-green};
-    --portfolio-border                  : #{$background-lighter};
-    --portfolio-card-bg                 : #{$background-light};
-    --portfolio-gradient                : linear-gradient(135deg, #{$primary-color} 0%, #{$accent-green} 50%, #{$accent-purple} 100%);
-    --portfolio-shadow                  : 0 10px 40px rgba(14, 165, 233, 0.1);
+    --portfolio-bg : #{$background};
+    --portfolio-text : #{$text};
+    --portfolio-text-secondary : #{$text-secondary};
+    --portfolio-accent : #{$primary-color};
+    --portfolio-accent-green : #{$accent-green};
+    --portfolio-border : #{$background-lighter};
+    --portfolio-card-bg : #{$background-light};
+    --portfolio-gradient: linear-gradient(135deg, #0ea5e9 0%, #10b981 50%, #14b8a6 100%);
+    --portfolio-shadow: 0 10px 40px rgba(14, 165, 233, 0.1);
 }
