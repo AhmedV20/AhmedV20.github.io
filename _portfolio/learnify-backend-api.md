@@ -7,4 +7,9 @@ image: "learnify-api.png"
 technologies: ["C#", ".NET 9", "SQL Server", "Redis", "Stripe", "Cloudinary", "Hangfire", "Docker"]
 github: "https://github.com/AhmedV20/Learnify"
 demo: "https://ahmedv20.github.io/Learnify/"
+project-type: "backend"
+has-backend: true
+has-frontend: false
+backend-slug: ""
+frontend-slug: ""
 ---
