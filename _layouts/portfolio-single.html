@@ -27,7 +27,7 @@
         <nav class="nav-links" role="navigation">
           <a href="/" class="nav-link">Home</a>
           <a href="#projects" class="nav-link">Projects</a>
-          <a href="mailto:{{ site.author.email }}" class="nav-link">Contact</a>
+          <a href="#contact-form" class="nav-link">Contact</a>
         </nav>
         <div class="nav-controls">
           <!-- Theme Toggle -->
@@ -90,6 +90,24 @@
 
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
+      <!-- Background Animated Effects -->
+      <div class="hero-coding-icons" aria-hidden="true">
+        <!-- Top Right Icons -->
+        <div class="coding-icon icon-top-right-1">
+          <img src="https://www.svgrepo.com/show/376369/dotnet.svg" alt=".NET" class="coding-icon-img">
+        </div>
+        <div class="coding-icon icon-top-right-2">
+          <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/csharp.svg" alt="C#" class="coding-icon-img">
+        </div>
+        <!-- Bottom Left Icons -->
+        <div class="coding-icon icon-bottom-left-1">
+          <img src="https://www.svgrepo.com/show/349540/typescript.svg" alt="TypeScript" class="coding-icon-img">
+        </div>
+        <div class="coding-icon icon-bottom-left-2">
+          <img src="https://www.svgrepo.com/show/471213/code-02.svg" alt="Code" class="coding-icon-img coding-icon-img-white">
+        </div>
+      </div>
+
       <div class="hero-content">
         <div class="hero-header-row">
           <div class="profile-image-container">
@@ -107,7 +125,8 @@
 
         <p class="hero-description">
           Aspiring Web Developer specializing in <span class="font-bold">C#/.NET backend</span>, experienced in <span
-            class="font-bold">full-stack applications</span>, and exploring AI/ML integration in web development.
+            class="font-bold">full-stack applications</span>, and exploring <span
+            class="font-bold">AI\ML</span> integration in web development.
         </p>
 
         <div class="hero-actions">
@@ -159,11 +178,11 @@
       <div class="tech-cube-grid">
         <!-- Backend -->
         <div class="tech-cube">
-          <i class="fas fa-code"></i>
+          <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/csharp.svg" alt="C#" class="tech-icon-svg">
           <span>C#</span>
         </div>
         <div class="tech-cube">
-          <i class="fab fa-microsoft"></i>
+          <img src="https://www.svgrepo.com/show/376369/dotnet.svg" alt=".NET" class="tech-icon-svg">
           <span>.NET</span>
         </div>
         <div class="tech-cube">
@@ -171,7 +190,7 @@
           <span>SQL</span>
         </div>
         <div class="tech-cube">
-          <i class="fas fa-database"></i>
+          <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/postgresql.svg" alt="PostgreSQL" class="tech-icon-svg">
           <span>Postgres</span>
         </div>
 
@@ -195,7 +214,7 @@
           <span>Git</span>
         </div>
         <div class="tech-cube">
-          <i class="fas fa-file-code"></i>
+          <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/swagger.svg" alt="Swagger" class="tech-icon-svg">
           <span>Swagger</span>
         </div>
         <div class="tech-cube">
@@ -407,11 +426,51 @@
       </div>
     </section>
 
+    <!-- Contact Form Section -->
+    <section class="contact-form-section" id="contact-form">
+      <div class="section-content">
+        <h3 class="section-title fade-in fade-up">CONTACT</h3>
+        <div class="contact-form-wrapper">
+          <div class="contact-form-box fade-in fade-up">
+            <div class="contact-form-content">
+              <!-- Left Side: Text -->
+              <div class="contact-form-text">
+                <h2 class="contact-form-title">Bringing your ideas to life.<br>Let's turn your vision into reality</h2>
+                <p class="contact-form-subtitle">Have a project in mind or just want to chat? Let's connect!</p>
+              </div>
+
+              <!-- Right Side: Form -->
+              <div class="contact-form-container">
+                <form action="https://formspree.io/f/mbdobppv" method="POST" class="contact-form">
+                  <div class="form-field">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="contact@example.com" required>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+                  </div>
+
+                  <button type="submit" class="form-submit-btn">Send</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- New Split Footer -->
     <footer class="split-footer" id="contact">
       <div class="footer-content">
         <div class="footer-top">
-          <!-- Left Side: Name -->
+          <!-- Left Side: Name, Location, Copyright -->
           <div class="footer-info">
             <div class="footer-name-wrap">
               <h3 class="footer-name">{{ site.author.name }}</h3>
@@ -419,13 +478,13 @@
             <div class="footer-location-wrap">
               <div class="footer-location">
                 <img src="https://flagcdn.com/w40/eg.png" alt="Egypt" class="egypt-flag">
-                based in Egypt
+                Based in Egypt
               </div>
             </div>
+            <div class="footer-copyright-inline">
+              <p>© 2026 Ahmed. All rights are reserved.</p>
+            </div>
           </div>
-
-          <!-- Divider -->
-          <div class="footer-divider"></div>
 
           <!-- Right Side: Social -->
           <div class="footer-social">
@@ -443,7 +502,7 @@
         </div>
 
         <div class="footer-bottom">
-          <p>© 2026 Ahmed. All rights are reserved.</p>
+          <!-- Copyright moved to left side inline -->
         </div>
       </div>
     </footer>
