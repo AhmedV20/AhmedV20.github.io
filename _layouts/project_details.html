@@ -236,7 +236,7 @@
         <header class="portfolio-nav" role="banner">
             <div class="nav-content">
                 <div class="nav-brand">
-                    <a href="{{ site.url }}" aria-label="Home">
+                    <a href="{{ site.baseurl }}/" aria-label="Home">
                         <div class="brand-logo"
                             style="display: flex; align-items: center; justify-content: center; background: linear-gradient(to right, #00f2ff, #00d9ff);">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -246,7 +246,7 @@
                                 <polyline points="8 6 2 12 8 18"></polyline>
                             </svg>
                         </div>
-                        <span class="brand-text">Ahmed.dev</span>
+                        <span href="{{ site.baseurl }}/" class="brand-text">Ahmed.dev</span>
                     </a>
                 </div>
                 <nav class="nav-links" role="navigation">
@@ -364,7 +364,7 @@
                         style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
                         {% if page.demo %}
                         <a href="{{ page.demo }}" target="_blank" class="action-btn small-btn">
-                            <i class="fas fa-globe"></i> Visit Project
+                            <i class="fas fa-globe"></i> Project Site
                         </a>
                         {% endif %}
                         {% if page.github %}
@@ -436,7 +436,7 @@
                         <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank"
                             aria-label="Linkedin"><i class="fab fa-linkedin"></i></a>
                         {% endif %}
-                        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i
+                        <a href="https://x.com/A7medV19" target="_blank" aria-label="Twitter"><i
                                 class="fab fa-twitter"></i></a>
                         <a href="mailto:{{ site.author.email }}" aria-label="Email"><i class="fas fa-envelope"></i></a>
                     </div>

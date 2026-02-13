@@ -6,7 +6,7 @@ collection: portfolio
 image: "appointment-platform.png"
 technologies: ["C#", ".NET", "SQL Server", "Entity Framework", "JWT", "REST API"]
 github: "https://github.com/AhmedV20/medical-appointment-system"
-demo: "https://medicalappointmentbookingsystem.duckdns.org"
+demo: "#"
 project-type: "backend"
 has-backend: true
 has-frontend: false
